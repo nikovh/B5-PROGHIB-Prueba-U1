@@ -1,0 +1,133 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> Cálculo de Perimetros</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="fnreload()">
+        <ion-icon name="home-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item>
+            <ion-select
+              label="Figura geometrica"
+              placeholder="Escoja una figura geométrica"
+              [(ngModel)]="selectFigura"
+              (ionChange)="fnseleccion()"
+            >
+              <ion-select-option value="circulo">Círculo</ion-select-option>
+              <ion-select-option value="triangulo">Triángulo</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="card_id=='circulo'">
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Círculo</ion-card-title>
+            <ion-card-subtitle>Perímetro</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            El perímetro de un círculo es la longitud de la línea que forma su
+            borde.
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <ion-img
+                    src="https://i0.wp.com/nte.mx/wp-content/uploads/2020/11/de-esta-manera-quedan.png?resize=1024%2C648&ssl=1"
+                  ></ion-img>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+            <ion-item>
+              <ion-input
+                label="Radio (cm)"
+                type="number"
+                labelPlacement="floating"
+                #radio
+              ></ion-input>
+            </ion-item>
+            <ion-button
+              expand="block"
+              (click)="fnSubmitCircle(radio)"
+              >CALCULAR EL PERIMETRO</ion-button
+            >
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="card_id=='triangulo'">
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Triángulo</ion-card-title>
+            <ion-card-subtitle>Perímetro</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            El perímetro de un tráangulo es la suma de las longitudes de sus
+            tres lados. En otras palabras, es la medida total del contorno o
+            borde del triángulo.
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <ion-img
+                    src="data:image/png;base64,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"
+                  ></ion-img>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+
+            <ion-item>
+              <ion-input
+                label="Lado A (cm)"
+                type="number"
+                #iLadoA
+                labelPlacement="floating"
+              ></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input
+                label="Lado B (cm)"
+                type="number"
+                #iLadoB
+                labelPlacement="floating"
+              ></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input
+                label="Lado C (cm)"
+                type="number"
+                #iLadoC
+                labelPlacement="floating"
+              ></ion-input>
+            </ion-item>
+
+            <ion-button
+              expand="block"
+              (click)="fnSubmit(iLadoA,iLadoB,iLadoC)"
+              >CALCULAR EL PERIMETRO</ion-button
+            >
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="mensaje" class="ion-text-center">
+      <ion-col>
+        <ion-text color="secondary">
+          <h3>
+            {{mensaje}}
+          </h3>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

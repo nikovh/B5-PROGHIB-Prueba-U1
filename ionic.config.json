@@ -1,0 +1,7 @@
+{
+  "name": "Prueba B5-U1",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
